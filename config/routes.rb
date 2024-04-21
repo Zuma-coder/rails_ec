@@ -3,4 +3,8 @@
 Rails.application.routes.draw do
   resources :tasks
   resources :products, only: %i[index show]
+
+  namespace :admin do
+    resources :products
+  end
 end
