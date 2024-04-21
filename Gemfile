@@ -86,4 +86,4 @@ end
 
 gem 'aws-sdk-s3'
 
-gem "rails-i18n"
+gem 'rails-i18n'

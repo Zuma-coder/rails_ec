@@ -14,8 +14,8 @@ class Product < ApplicationRecord
   def sales_price_must_be_less_than_normal_price
     return if sales_price.blank?
 
-    if sales_price >= normal_price
-      errors.add(:sales_price, :greater_than, count: "通常価格")
-    end
+    return unless sales_price >= normal_price
+
+    errors.add(:sales_price, :greater_than, count: '通常価格')
   end
 end

@@ -18,36 +18,36 @@
     <%= render partial: "navbar"%>
     <!-- Product section-->
     <section class="py-5">
-        <div class="container">
-            <h2 class="mb-4">商品登録</h2>
-            <%= form_with model: @product, url: admin_product_path(@product), local: true do |form| %>
-              <div class="mb-3">
-                <%= form.label :name, "商品名" %>
-                <%= form.text_field :name, class: "form-control" %>
-              </div>
-              <div class="mb-3">
-                <%= form.label :code, "商品コード" %>
-                <%= form.text_field :code, class: "form-control" %>
-              </div>
-              <div class="mb-3">
-                <%= form.label :normal_price, "通常価格" %>
-                <%= form.number_field :normal_price, class: "form-control" %>
-              </div>
-              <div class="mb-3">
-                <%= form.label :sales_price, "割引価格" %>
-                <%= form.number_field :sales_price, class: "form-control" %>
-              </div>
-              <div class="mb-3">
-                <%= form.label :description, "商品説明" %>
-                <%= form.text_area :description, rows: 3, class: "form-control" %>
-              </div>
-              <div class="mb-3">
-                <%= form.label :image, "商品画像" %>
-                <%= form.file_field :image, class: "form-control" %>
-              </div>
-              <%= form.submit "保存", class: "btn btn-primary" %>
-            <% end %>
-        </div>
+      <div class="container">
+        <h2 class="mb-4">商品登録</h2>
+        <%= form_with model: @product, url: admin_product_path(@product), local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :name, "商品名" %>
+            <%= form.text_field :name, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :code, "商品コード" %>
+            <%= form.text_field :code, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :normal_price, "通常価格" %>
+            <%= form.number_field :normal_price, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :sales_price, "割引価格" %>
+            <%= form.number_field :sales_price, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :description, "商品説明" %>
+            <%= form.text_area :description, rows: 3, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :image, "商品画像" %>
+            <%= form.file_field :image, class: "form-control" %>
+          </div>
+          <%= form.submit "保存", class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </section>
     <!-- Footer-->
     <footer class="py-5 bg-dark">
