@@ -45,6 +45,12 @@
             <p class="lead"><%= @product.description %></p>
             <div class="d-flex">
               <%= link_to '編集', edit_admin_product_path(@product), class: 'btn btn-outline-dark mt-auto' %>
+              <%= link_to '削除', admin_product_path(@product),
+                          data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "削除しますか？"
+                          },
+                          class: 'btn btn-danger mt-auto' %>
             </div>
           </div>
         </div>
