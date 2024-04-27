@@ -3,6 +3,7 @@
 module Admin
   class ProductsController < ApplicationController
     http_basic_authenticate_with name: 'admin', password: 'pw'
+    before_action :set_product, only: %i[show edit update destroy]
 
     def index
       @products = Product.with_attached_image.all
@@ -12,7 +13,6 @@ module Admin
       @products = Product.with_attached_image
                          .order(created_at: :desc)
                          .limit(4)
-      @product = Product.find(params[:id])
     end
 
     def new
@@ -29,11 +29,9 @@ module Admin
     end
 
     def edit
-      @product = Product.find(params[:id])
     end
 
     def update
-      @product = Product.find(params[:id])
       if @product.update(product_params)
         redirect_to admin_product_path(@product), notice: '商品を更新しました。'
       else
@@ -42,7 +40,6 @@ module Admin
     end
 
     def destroy
-      @product = Product.find(params[:id])
       @product.destroy
       redirect_to admin_products_path, notice: '商品を削除しました。', status: :see_other
     end
@@ -51,6 +48,10 @@ module Admin
 
     def product_params
       params.require(:product).permit(:name, :code, :normal_price, :sales_price, :description, :image)
+    end
+
+    def set_product
+      @product = Product.find(params[:id])
     end
   end
 end
