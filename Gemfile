@@ -85,3 +85,5 @@ group :test do
 end
 
 gem 'aws-sdk-s3'
+
+gem 'rails-i18n'
