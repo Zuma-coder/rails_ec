@@ -9,6 +9,10 @@ class Product < ApplicationRecord
 
   validate :sales_price_must_be_less_than_normal_price
 
+  def price
+    sales_price || normal_price
+  end
+
   private
 
   def sales_price_must_be_less_than_normal_price
