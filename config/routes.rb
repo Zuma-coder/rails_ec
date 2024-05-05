@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :products
   end
+
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

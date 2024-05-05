@@ -10,8 +10,9 @@ class UsersController < ApplicationController
         @user.save!
         create_order_with_items(@user, @cart)
       end
+      OrderMailer.order_confirmation(@user, @user.orders.last).deliver_now
       redirect_to products_path, notice: '購入ありがとうございます。'
-    rescue
+    rescue StandardError
       @cart = current_cart
       render 'carts/show', status: :unprocessable_entity
     end
@@ -28,7 +29,7 @@ class UsersController < ApplicationController
     order = Order.create!(
       user_id: user.id,
       total_price: cart.total_price,
-      order_date: Date.today
+      order_date: Time.zone.today
     )
 
     cart.cart_items.each do |item|
