@@ -28,8 +28,7 @@ class UsersController < ApplicationController
   def create_order_with_items(user, cart)
     order = Order.create!(
       user_id: user.id,
-      total_price: cart.total_price,
-      order_date: Time.zone.today
+      total_price: cart.total_price
     )
 
     cart.cart_items.each do |item|
