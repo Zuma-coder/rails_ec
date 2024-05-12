@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_29_110419) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_11_144217) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_29_110419) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "promotion_price"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -72,6 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_29_110419) do
     t.integer "total_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "promotion_price"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -83,6 +85,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_29_110419) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "promotions", force: :cascade do |t|
+    t.string "code"
+    t.integer "price"
+    t.boolean "is_used"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_promotions_on_code", unique: true
   end
 
   create_table "tasks", force: :cascade do |t|
