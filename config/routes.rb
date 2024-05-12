@@ -7,8 +7,12 @@ Rails.application.routes.draw do
   resources :products, only: %i[index show]
   resource :carts, only: %i[show]
   resources :cart_items, only: %i[create update destroy]
+  resources :users, only: %i[new create]
+  resources :orders, only: %i[index show]
 
   namespace :admin do
     resources :products
   end
+
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

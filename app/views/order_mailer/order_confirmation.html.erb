@@ -1,0 +1,12 @@
+<h1><%= "#{@user.first_name} #{@user.last_name}様" %></h1>
+<p>購入ありがとうございます。</p>
+<p>以下、購入明細となります。</p>
+<% @order.order_items.each do |item| %>
+  ========================================================
+  <p>商品名： <%= item.product_name %></p>
+  <p>価格： <%= number_to_currency(item.price) %></p>
+  <p>数量： <%= item.quantity %></p>
+  <p>小計： <%= number_to_currency(item.price * item.quantity) %></p>
+  ========================================================
+<% end %>
+<p>合計金額: <%= number_to_currency(@order.total_price) %></p>

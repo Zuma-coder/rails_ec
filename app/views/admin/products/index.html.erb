@@ -17,8 +17,8 @@
     <!-- Navigation-->
     <%= render partial: "navbar"%>
     <!-- Section-->
-    <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% if notice %>
+      <p style="color: green"><%= notice %></p>
     <% end %>
     <section class="py-5">
       <div class="container px-4 px-lg-5 mt-5">

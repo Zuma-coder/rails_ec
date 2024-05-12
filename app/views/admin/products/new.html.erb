@@ -20,7 +20,7 @@
     <section class="py-5">
       <div class="container">
         <h2 class="mb-4">商品登録</h2>
-        <%= render 'error_messages', model: @product %>
+        <%= render 'common/error_messages', model: @product %>
         <%= form_with model: @product, url: admin_products_path, local: true do |form| %>
           <div class="mb-3">
             <%= form.label :name, "商品名" %>

@@ -24,6 +24,9 @@
             <li class="nav-item">
               <%= link_to '管理者', admin_products_path, class: 'nav-link' %>
             </li>
+            <li class="nav-item">
+              <%= link_to '明細一覧', orders_path, class: 'nav-link' %>
+            </li>
           </ul>
           <div class="d-flex">
             <%= link_to carts_path, class: 'btn btn-outline-dark' do %>
@@ -38,6 +41,9 @@
       </div>
     </nav>
     <!-- Header-->
+    <% if notice %>
+      <p style="color: green"><%= notice %></p>
+    <% end %>
     <header class="bg-dark py-5">
       <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">

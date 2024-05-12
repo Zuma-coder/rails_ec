@@ -4,7 +4,7 @@ class CartItemsController < ApplicationController
   def create
     return unless current_cart.add_item(product_id: params[:product_id], quantity: params[:quantity])
 
-    redirect_to products_path
+    redirect_to products_path, notice: 'カートに商品を追加しました。'
   end
 
   def update
