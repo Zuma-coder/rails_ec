@@ -9,7 +9,6 @@ class CartsController < ApplicationController
 
   def update
     @cart = current_cart
-    Promotion.find_by(code: promotion_params[:code])
     if @cart.can_apply_promotion?(promotion_params[:code])
       redirect_to cart_path, notice: 'プロモーションコードが正常に適用されました。'
     else

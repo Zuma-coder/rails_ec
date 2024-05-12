@@ -61,7 +61,7 @@
               </strong>
             </li>
           </ul>
-          <%= form_with model: @promotion, url: cart_path, class: "card p-2", local: true do |form| %>
+          <%= form_with model: @promotion, url: cart_path, method: :patch, class: "card p-2", local: true do |form| %>
             <div class="input-group">
               <%= form.text_field :code, class: 'form-control', placeholder: 'プロモーションコード'%>
               <div class="input-group-append">
