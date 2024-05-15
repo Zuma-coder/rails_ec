@@ -46,6 +46,9 @@
           <% end %>
         </tbody>
       </table>
+      <% if @order.promotion_price %>
+        <p>プロモーション金額: <%= number_to_currency(-@order.promotion_price) %></p>
+      <% end %>
       <h3>合計金額 <%= number_to_currency(@order.total_price) %></h3>
     </div>
   </body>

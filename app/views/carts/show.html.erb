@@ -46,21 +46,34 @@
                 </li>
               <% end %>
             <% end %>
+            <% if @cart.promotion_price %>
+              <li class="list-group-item d-flex justify-content-between"　>
+                <span>プロモーション金額</span>
+                <strong style="color: green">
+                  <%= number_to_currency(-@cart.promotion_price) %>
+                </strong>
+              </li>
+            <% end %>
             <li class="list-group-item d-flex justify-content-between">
               <span>合計金額</span>
               <strong>
-                <%= @cart.total_price %>円
+                <%= number_to_currency([@cart.total_price - (@cart.promotion_price || 0), 0].max) %>
               </strong>
             </li>
           </ul>
-          <form class="card p-2">
+          <%= form_with model: @promotion, url: cart_path, method: :patch, class: "card p-2", local: true do |form| %>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Promo code">
+              <%= form.text_field :code, class: 'form-control', placeholder: 'プロモーションコード'%>
               <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary">Redeem</button>
+                <%= form.submit '適用する', class: 'btn btn-secondary', disabled: @cart.promotion_price.present? %>
               </div>
             </div>
-          </form>
+            <% if flash[:notice] %>
+              <p style="color: green"><%= flash[:notice] %></p>
+            <% elsif flash[:alert] %>
+              <p style="color: red"><%= flash[:alert] %></p>
+            <% end %>
+          <% end %>
         </div>
         <div class="col-md-8 order-md-1">
           <h4 class="mb-3">請求先住所</h4>

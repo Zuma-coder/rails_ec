@@ -9,6 +9,7 @@ class UsersController < ApplicationController
       ActiveRecord::Base.transaction do
         @user.save!
         create_order_with_items(@user, @cart)
+        @cart.update!(promotion_price: nil)
       end
       OrderMailer.order_confirmation(@user, @user.orders.last).deliver_now
       redirect_to products_path, notice: '購入ありがとうございます。'
@@ -28,7 +29,8 @@ class UsersController < ApplicationController
   def create_order_with_items(user, cart)
     order = Order.create!(
       user_id: user.id,
-      total_price: cart.total_price
+      total_price: [cart.total_price - (cart.promotion_price || 0), 0].max,
+      promotion_price: cart.promotion_price || 0
     )
 
     cart.cart_items.each do |item|

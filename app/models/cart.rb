@@ -32,4 +32,23 @@ class Cart < ApplicationRecord
       item.product.price * item.quantity
     end
   end
+
+  def can_apply_promotion?(code)
+    promotion = Promotion.find_by(code:)
+    if promotion && !promotion.is_used
+      ActiveRecord::Base.transaction do
+        self.promotion_price = promotion.price
+        save!
+        promotion.update!(is_used: true)
+      end
+      # プロモーションが適用されたらtrueを返す
+      true
+    else
+      # プロモーションが適用されなければfalseを返す
+      false
+    end
+  rescue ActiveRecord::RecordInvalid
+    # 保存に失敗した場合はfalseを返す
+    false
+  end
 end
